@@ -65,6 +65,10 @@ resource functionAppName 'Microsoft.Web/sites@2020-06-01' = {
           value: 'python'
         }
         {
+          name: 'WEBSITES_ENABLE_APP_SERVICE_STORAGE'
+          value: 'false'
+        }
+        {
           name: 'APPINSIGHTS_INSTRUMENTATIONKEY'
           value: reference(applicationInsightsName.id, '2020-02-02-preview').InstrumentationKey
         }

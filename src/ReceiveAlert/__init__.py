@@ -12,6 +12,7 @@ defaultChannelDefinitions = """{
 }"""
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
+  try:
     logging.info('Python HTTP trigger function processed a request.')
     req_body = req.get_body().decode('utf-8')
     logging.info(f'Received request with body: {req_body}')
@@ -21,3 +22,6 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             f"Sents {len(result)} messages",
             status_code=200
     )
+  except Exception as e:
+    logging.error(f'Error: {e}')
+    return func.HttpResponse(f"Error: {e}", status_code=500)
