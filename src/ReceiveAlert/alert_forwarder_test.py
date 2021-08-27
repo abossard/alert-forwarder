@@ -1,4 +1,4 @@
-from alert_forwarder import parse_alert,  extract_channel_override, parse_channel_definition, map_alert_to_channel
+from alert_forwarder import parse_alert,  extract_channel_override, parse_channel_definition, map_alert_to_channels, create_slack_message, send_slack_message, handle_request_body
 import unittest
 
 
@@ -77,8 +77,23 @@ class TestAlertForwarder(unittest.TestCase):
 
     def test_default_rules(self):
       alert = parse_alert(examplePayload)
-      result = map_alert_to_channel(alert, parse_channel_definition(exampleChannelDefinition))
-      self.assertEqual(result, "Warning")
+      result = map_alert_to_channels(alert, parse_channel_definition(exampleChannelDefinition))
+      self.assertEqual(result[0].name, "Warning")
+    
+    def test_create_slack_message(self):
+      alert = parse_alert(examplePayload)
+      result = create_slack_message(alert)
+      self.assertIn(alert.data.essentials.severity, result["blocks"][0]["text"]["text"])
+
+    def test_send_slack_message(self):
+      message = create_slack_message(parse_alert(examplePayload))
+      result = send_slack_message(message, "https://hooks.slack.com/services/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")
+      self.assertEqual(result.status_code, 200)
+
+
+    def test_handle_request_body(self):
+      result = handle_request_body(examplePayload, parse_channel_definition(exampleChannelDefinition))
+      self.assertEqual(result[0].status_code, 200)
 
 if __name__ == '__main__':
     unittest.main()
