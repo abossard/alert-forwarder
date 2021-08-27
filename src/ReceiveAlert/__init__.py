@@ -1,15 +1,15 @@
 import logging
-from ReceiveAlert.alert_forwarder import handle_request_body
+from ReceiveAlert.alert_forwarder import handle_request_body, parse_channel_definition
 
 import azure.functions as func
 
-defaultChannelDefinitions = """{
+defaultChannelDefinitions = parse_channel_definition("""{
   "channels": [
     {"name": "Critical", "webhook": "https://hooks.slack.com/services/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"},
     {"name": "Warning", "webhook": "https://hooks.slack.com/services/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"},
     {"name": "Information", "webhook": "https://hooks.slack.com/services/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"}
   ]
-}"""
+}""")
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
   try:
