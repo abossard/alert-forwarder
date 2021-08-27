@@ -1,0 +1,12 @@
+az bicep upgrade
+az group create --name anbossar-alert-forwarder --location westeurope
+az deployment group create -g anbossar-alert-forwarder --template-file ./deployment/azuredeploy.bicep --mode complete
+az functionapp list -g anbossar-alert-forwarder --query "[? contains(name, 'fnapp')].name | [0]"
+Remove-Item deploy.zip -ErrorAction Ignore
+Compress-Archive -Path src/* -DestinationPath deploy.zip 
+az functionapp deployment source config-zip -g anbossar-alert-forwarder -n fnappby5k2zhwjyilc --src deploy.zip
+az functionapp list -g anbossar-alert-forwarder --query "[? contains(name, 'fnapp')].defaultHostName | [0]"
+
+
+# uninstall
+#az deployment group create -g anbossar-alert-forwarder --template-file ./deployment/undeploy.bicep --mode complete
