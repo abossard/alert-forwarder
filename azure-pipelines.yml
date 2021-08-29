@@ -11,6 +11,7 @@ variables:
   vmImageName: 'ubuntu-latest'
   workingDirectory: '$(System.DefaultWorkingDirectory)/src'
   resourceGroupName: 'anbossar-alert-forwarder'
+  functionAppPrefix: 'fnapp'
   location: 'westeurope'
   templateFile: './deployment/azuredeploy.bicep'
 
@@ -54,15 +55,10 @@ stages:
               scriptType: bash
               scriptLocation: inlineScript
               inlineScript: |
-                az --version
                 az group create --name $(resourceGroupName) --location $(location)
-                az deployment group create --resource-group $(resourceGroupName) --template-file $(templateFile)
-                FUNCTION_NAME=`az functionapp list -g  $(resourceGroupName) --query "[? contains(name, 'fnapp')].name | [0]" | tr -d \"`
-                echo '##vso[task.setvariable variable=FUNCTION_NAME]$FUNCTION_NAME'
-          - task: AzureFunctionApp@1
-            displayName: 'Azure functions app deploy'
-            inputs:
-              azureSubscription: '$(azureSubscription)'
-              appType: functionAppLinux
-              appName: $(FUNCTION_NAME)
-              package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
+                az deployment group create --resource-group $(resourceGroupName) --template-file $(templateFile) --parameters appNamePrefix=$(functionAppPrefix)
+                FUNCTION_NAME=`az functionapp list -g  $(resourceGroupName) --query "[? contains(name, '$(functionAppPrefix)')].name | [0]" | tr -d \"`
+                echo Function Name is: $FUNCTION_NAME
+                cd src
+                npx func azure functionapp publish $FUNCTION_NAME
+                az functionapp list -g $(resourceGroupName) --query "[? contains(name, '$(functionAppPrefix)')].defaultHostName | [0]"
