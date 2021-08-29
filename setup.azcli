@@ -1,6 +1,6 @@
 az bicep upgrade
 az group create --name anbossar-alert-forwarder --location westeurope
-az deployment group create -g anbossar-alert-forwarder --template-file ./deployment/azuredeploy.bicep --mode complete
+az deployment group create -g anbossar-alert-forwarder --template-file ./deployment/azuredeploy.bicep --parameters appNamePrefix=fnapp
 az functionapp list -g anbossar-alert-forwarder --query "[? contains(name, 'fnapp')].name | [0]"
 cd src
 func azure functionapp publish fnappby5k2zhwjyilc

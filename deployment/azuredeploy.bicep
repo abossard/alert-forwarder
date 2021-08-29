@@ -1,5 +1,8 @@
 @description('The name of the function app that you wish to create.')
-param appName string = 'fnapp${uniqueString(resourceGroup().id)}'
+param appNamePrefix string = 'fnapp'
+
+@description('The name of the function app that you wish to create.')
+param appName string = '${appNamePrefix}${uniqueString(resourceGroup().id)}'
 
 @allowed([
   'Standard_LRS'
