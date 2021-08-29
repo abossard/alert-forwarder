@@ -31,7 +31,7 @@ stages:
     - script: |
         python -m pip install --upgrade pip setuptools wheel
         pip install -r src/requirements.txt
-        python -m xmlrunner discover -s .\src -o test-results
+        python -m xmlrunner discover -s $(workingDirectory) -v -o test-results
       displayName: Run tests
     - task: PublishTestResults@2
       condition: succeededOrFailed()
