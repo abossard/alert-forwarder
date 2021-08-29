@@ -25,10 +25,13 @@ stages:
     pool:
       vmImage: $(vmImageName)
     steps:
+    - task: UsePythonVersion@0
+      inputs:
+        version: 3.9
     - script: |
         python -m pip install --upgrade pip setuptools wheel
         pip install -r src/requirements.txt
-        python -m xmlrunner discover -s .\src -o test_results
+        python -m xmlrunner discover -s .\src -o test-results
       displayName: Run tests
     - task: PublishTestResults@2
       condition: succeededOrFailed()
