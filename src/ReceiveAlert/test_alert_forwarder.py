@@ -1,6 +1,9 @@
+# allow discovery and relative pythonpath
+import sys, os
+sys.path.insert(0, os.path.dirname(__file__))
+
 from alert_forwarder import parse_alert,  extract_channel_override, parse_channel_definition, map_alert_to_channels, create_slack_message, send_slack_message, handle_request_body
 import unittest
-
 
 examplePayload = """{
   "schemaId": "azureMonitorCommonAlertSchema",

@@ -24,13 +24,17 @@ stages:
     displayName: Build
     pool:
       vmImage: $(vmImageName)
-
     steps:
-    - task: UsePythonVersioan@0
-      displayName: 'Use Python 3.9'
+    - script: |
+        python -m pip install --upgrade pip setuptools wheel
+        pip install -r src/requirements.txt
+        python -m xmlrunner discover -s .\src -o test_results
+      displayName: Run tests
+    - task: PublishTestResults@2
+      condition: succeededOrFailed()
       inputs:
-        versionSpec: 3.9 
-
+        testResultsFiles: '**/TEST-*.xml'
+        testRunTitle: 'Publish test results'
 
 - stage: Deploy
   displayName: Deploy stage
@@ -50,6 +54,7 @@ stages:
           steps:
           - checkout: self
           - task: AzureCLI@2
+            displayName: Deploy to Azure
             inputs:
               azureSubscription: $(azureSubscription)
               scriptType: bash
