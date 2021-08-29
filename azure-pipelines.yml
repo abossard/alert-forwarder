@@ -17,11 +17,11 @@ variables:
 
 stages:
 - stage: Build
-  displayName: Build stage
+  displayName: Build and test stage
 
   jobs:
-  - job: Build
-    displayName: Build
+  - job: BuildAndTest
+    displayName: Build and Test
     pool:
       vmImage: $(vmImageName)
     steps:
@@ -45,8 +45,8 @@ stages:
   condition: succeeded()
 
   jobs:
-  - deployment: Deploy
-    displayName: Deploy
+  - deployment: DeployDev
+    displayName: Deploy to Development
     environment: 'development'
     pool:
       vmImage: $(vmImageName)
