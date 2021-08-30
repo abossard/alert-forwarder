@@ -68,5 +68,5 @@ stages:
                 FUNCTION_NAME=`az functionapp list -g  $(resourceGroupName) --query "[? contains(name, '$(functionAppPrefix)')].name | [0]" | tr -d \"`
                 echo Function Name is: $FUNCTION_NAME
                 cd src
-                npx azure-functions-core-tools@3 azure functionapp publish $FUNCTION_NAME
+                npx azure-functions-core-tools@3 azure functionapp publish $FUNCTION_NAME --python
                 az functionapp list -g $(resourceGroupName) --query "[? contains(name, '$(functionAppPrefix)')].defaultHostName | [0]"
