@@ -56,6 +56,9 @@ stages:
         deploy:
           steps:
           - checkout: self
+          - task: UsePythonVersion@0
+            inputs:
+              version: 3.9
           - task: AzureCLI@2
             displayName: Deploy to Azure
             inputs:
