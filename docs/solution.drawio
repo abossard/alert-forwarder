@@ -1,0 +1,41 @@
+<mxfile host="65bd71144e">
+    <diagram id="ikAnKcbvA6EqhRZ69RCY" name="Page-1">
+        <mxGraphModel dx="933" dy="769" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="2" target="5">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2" value="Azure Monitor" style="aspect=fixed;html=1;points=[];align=center;image;fontSize=12;image=img/lib/azure2/management_governance/Monitor.svg;" vertex="1" parent="1">
+                    <mxGeometry x="120" y="230" width="64" height="64" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="Alert" style="verticalLabelPosition=bottom;html=1;verticalAlign=top;align=center;strokeColor=none;fillColor=#00BEF2;shape=mxgraph.azure.azure_alert;" vertex="1" parent="1">
+                    <mxGeometry x="270" y="194.5" width="50" height="42.5" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="Slack" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=none;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://cdn.worldvectorlogo.com/logos/slack-new-logo.svg;" vertex="1" parent="1">
+                    <mxGeometry x="690" y="237" width="50" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="5" target="4">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="Azure Function" style="aspect=fixed;html=1;points=[];align=center;image;fontSize=12;image=img/lib/azure2/compute/Function_Apps.svg;labelBackgroundColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="420" y="232" width="68" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="M" parent="0"/>
+                <mxCell id="11" value="Alert Forwarder" style="rounded=0;whiteSpace=wrap;html=1;labelBackgroundColor=none;fontStyle=1" vertex="1" parent="10">
+                    <mxGeometry x="390" y="320" width="140" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" value="- parse alerts&lt;br&gt;- select channels&lt;br&gt;- send slack message&lt;br&gt;- ...." style="rounded=0;whiteSpace=wrap;html=1;labelBackgroundColor=none;align=left;verticalAlign=top;fillColor=#e3c800;strokeColor=#B09500;fontColor=#000000;" vertex="1" parent="10">
+                    <mxGeometry x="390" y="370" width="120" height="290" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" value="handle_request_body" style="rounded=0;whiteSpace=wrap;html=1;labelBackgroundColor=none;align=left;verticalAlign=middle;fillColor=#008a00;strokeColor=#005700;fontColor=#ffffff;" vertex="1" parent="10">
+                    <mxGeometry x="390" y="350" width="120" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" value="Tests" style="rounded=0;whiteSpace=wrap;html=1;labelBackgroundColor=none;align=center;verticalAlign=middle;horizontal=0;fillColor=#f0a30a;strokeColor=#BD7000;fontColor=#000000;" vertex="1" parent="10">
+                    <mxGeometry x="510" y="350" width="20" height="310" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

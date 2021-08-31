@@ -4,6 +4,8 @@ import json
 from types import SimpleNamespace
 import requests
 
+
+# Parsers
 def parse_json(json_payload):
     return json.loads(json_payload, object_hook=lambda d: SimpleNamespace(**d))
 
@@ -16,8 +18,9 @@ def parse_channel_definition(json_payload):
     return parse_json(json_payload)
 
 
-def default_to(level):
-    return lambda alert: level
+# Rules
+def default_to(channel):
+    return lambda alert: channel
 
 
 def extract_channel_override(alert):
@@ -30,6 +33,7 @@ default_rules = [
 ]
 
 
+# Mappers
 def map_alert_to_channels(alert, channel_definition, rules=default_rules):
     channel_names = [channel.name for channel in channel_definition.channels]
     for rule in rules:
